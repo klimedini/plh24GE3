@@ -11,4 +11,19 @@
         <maven.compiler.target>17</maven.compiler.target>
         <exec.mainClass>gr.eap.myteam.plh24ge3.Plh24GE3</exec.mainClass>
     </properties>
+        <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
+    <dependencies>
+        <dependency>
+        <groupId>com.squareup.okhttp3</groupId>
+        <artifactId>okhttp</artifactId>
+        <version>4.10.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.derby/derby -->
+    <dependency>
+        <groupId>org.apache.derby</groupId>
+        <artifactId>derby</artifactId>
+        <version>10.17.1.0</version>
+        <scope>test</scope>
+    </dependency>
+    </dependencies>
 </project>
