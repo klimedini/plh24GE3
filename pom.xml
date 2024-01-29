@@ -17,13 +17,14 @@
         <groupId>com.squareup.okhttp3</groupId>
         <artifactId>okhttp</artifactId>
         <version>4.10.0</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.derby/derby -->
-    <dependency>
-        <groupId>org.apache.derby</groupId>
-        <artifactId>derby</artifactId>
-        <version>10.17.1.0</version>
-        <scope>test</scope>
-    </dependency>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.derby/derby -->
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.16.1.1</version><!-- latest version does not contain the org.apache.derby.jdbc.EmbeddedDriver  -->
+        </dependency>
+
+
     </dependencies>
 </project>
