@@ -4,7 +4,11 @@
 
 package gr.eap.myteam.plh24ge3;
 
-import java.sql.*;
+import gr.eap.myteam.plh24ge3.db.DbUtil;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,26 +17,29 @@ import java.util.logging.Logger;
  * @author alex
  */
 public class Plh24GE3 {
+    
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private static SimpleDateFormat timestamp =   new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     public static void main(String[] args) {
         System.out.println("Hello World!"); 
         System.out.println("test"); 
-        connect();
+        //DbUtil.connect();
+//        HashMap<String,String> columns = new HashMap<>();
+//        Date now = new Date();
+//        columns.put("temperature", "250");
+//        columns.put("humidity", "260");
+//        columns.put("windspeedKmph", "220");
+//        columns.put("uvIndex", "25");
+//        columns.put("weatherDesc", "'2sunny'");
+//        columns.put("createDate", "'"+timestamp.format(now)+"'");
+//        columns.put("weatherDate", "'"+sdf.format(now)+"'");
+//        columns.put("town", "'athens'");
+        //DbUtil.createTable("weather", columns);
+        
+//        DbUtil.editDataInTable("weather", columns);
         
         
     }
-    
-    private static Connection connect(){
-        try {
-            //String driver = "org.apache.derby.jdbc.EmbeddedDriver";
-           // Object kati = Class.forName(driver).newInstance();
-             String protocol = "jdbc:derby:";
-            String connectionString = protocol+"./derbyDB;create=true";
-            Connection connection = DriverManager.getConnection(connectionString);
-            return connection;
-        } catch (Exception ex) {
-            Logger.getLogger(Plh24GE3.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
+
 }
