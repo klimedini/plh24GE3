@@ -44,6 +44,8 @@ public class Plh24GE3 {
         for (Map.Entry<String, String> column : results.entrySet()) {
             System.out.println("after: " +column.getKey() + " : " + column.getValue());
         }
+        
+        //DbUtil.deleteDataFromTable("weather", 4);
 
     }
 

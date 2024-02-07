@@ -63,6 +63,20 @@ public class DbUtil {
         return null;
     }
 
+    public static void deleteDataFromTable(String name, int id) {
+        try {
+            Connection connection = connect();
+            Statement statement = connection.createStatement();
+            StringBuffer deleteSQL = new StringBuffer("DELETE FROM " + name.toUpperCase());
+            deleteSQL.append(" WHERE ID = " + id);
+            int num = statement.executeUpdate(deleteSQL.toString());
+            System.out.println("deleted " + num + " rows");
+            connection.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+    }
+
     public static void createTable(String name, HashMap<String, String> columns) {
 
         try {
@@ -132,7 +146,7 @@ public class DbUtil {
                 results.put("createDate", rs.getString("createDate"));
                 results.put("weatherDate", rs.getString("weatherDate"));
                 results.put("town", rs.getString("town"));
-                
+
             }
             connection.close();
             return results;
