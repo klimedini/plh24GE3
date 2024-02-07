@@ -3,6 +3,7 @@
  */
 package gr.eap.myteam.plh24ge3;
 
+import gr.eap.myteam.plh24ge3.GE3GUI.GE3GUI;
 import gr.eap.myteam.plh24ge3.db.DbUtil;
 import gr.eap.myteam.plh24ge3.models.Weather;
 import java.text.SimpleDateFormat;
@@ -24,16 +25,18 @@ public class Plh24GE3 {
     public static void main(String[] args) {
         System.out.println("Hello World!");
         System.out.println("test");
-        Date now = new Date();
-        Weather columns = new Weather(15, 70, 10, 3, "kalws2", timestamp.format(now) ,  sdf.format(now) , "athens");
+//        Date now = new Date();
+//        Weather columns = new Weather(15, 70, 10, 3, "kalws2", timestamp.format(now) ,  sdf.format(now) , "athens");
 //DbUtil.addDataInTable("weather", columns);
-        Weather results = DbUtil.getDataFromTable("weather", 4);
-        System.out.println(results.toString());
-        results.setWeatherDesc("kalws4");
+//        Weather results = DbUtil.getDataFromTable("weather", 4);
+//        System.out.println(results.toString());
+//        results.setWeatherDesc("kalws4");
         
-        DbUtil.editDataInTable("weather", results.getId(), results);
-        results = DbUtil.getDataFromTable("weather", results.getId());
-        System.out.println(results.toString());
+//        DbUtil.editDataInTable("weather", results.getId(), results);
+//        results = DbUtil.getDataFromTable("weather", results.getId());
+//        System.out.println(results.toString());
+        
+        new GE3GUI().setVisible(true);
 
         //DbUtil.deleteDataFromTable("weather", 4);
     }

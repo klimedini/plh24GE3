@@ -1,3 +1,5 @@
+package gr.eap.myteam.plh24ge3.GE3GUI;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
