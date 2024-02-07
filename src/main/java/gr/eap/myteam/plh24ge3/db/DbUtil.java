@@ -38,7 +38,6 @@ public class DbUtil {
 //        columns.put("createDate", "timestamp not null");
 //        columns.put("weatherDate", "date not null");
 //        columns.put("town", "varchar(100) not null");
-    
 // TEST DATA FOR TABLE WEATHER 
 //    HashMap<String,String> columns = new HashMap<>();
 //    Date now = new Date();
@@ -65,17 +64,18 @@ public class DbUtil {
     }
 
     public static void createTable(String name, HashMap<String, String> columns) {
-        Connection connection = connect();
-        StringBuffer createSQL = new StringBuffer("CREATE TABLE " + name.toUpperCase());
-        createSQL.append("(ID INTEGER NOT NULL PRIMARY KEY");
-        for (Map.Entry<String, String> column : columns.entrySet()) {
-            createSQL.append(", ");
-            System.out.println("column name: " + column.getKey().toUpperCase());
-            System.out.println("column type: " + column.getValue().toUpperCase());
-            createSQL.append(column.getKey().toUpperCase() + " " + column.getValue().toUpperCase());
-        }
-        createSQL.append(") ");
+
         try {
+            Connection connection = connect();
+            StringBuffer createSQL = new StringBuffer("CREATE TABLE " + name.toUpperCase());
+            createSQL.append("(ID INTEGER NOT NULL PRIMARY KEY");
+            for (Map.Entry<String, String> column : columns.entrySet()) {
+                createSQL.append(", ");
+                System.out.println("column name: " + column.getKey().toUpperCase());
+                System.out.println("column type: " + column.getValue().toUpperCase());
+                createSQL.append(column.getKey().toUpperCase() + " " + column.getValue().toUpperCase());
+            }
+            createSQL.append(") ");
             if (!columns.isEmpty()) {
                 System.out.println("create sql string: " + createSQL.toString());
                 Statement statement = connection.createStatement();
@@ -86,6 +86,7 @@ public class DbUtil {
             }
             //String insertSQL = "INSERT INTO D_USER VALUES(1,'Athanasia','12345')";
             //statement.executeUpdate(insertSQL);
+            connection.close();
         } catch (SQLException ex) {
             System.out.println(ex.getLocalizedMessage());
         }
@@ -101,10 +102,11 @@ public class DbUtil {
             System.out.println("query: " + query);
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
-                if(rs.getInt(1) >= id){
+                if (rs.getInt(1) >= id) {
                     id = rs.getInt(1);
                 }
             }
+            connection.close();
             return id;
         } catch (SQLException ex) {
             Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, null, ex);
@@ -112,34 +114,94 @@ public class DbUtil {
         return -1;
     }
 
-    public static void editDataInTable(String name, HashMap<String, String> columns) {
+    public static HashMap<String, String> getDataFromTable(String name, int id) {
+        HashMap<String, String> results = new HashMap<>();
         try {
             Connection connection = connect();
             Statement statement = connection.createStatement();
-            int id = getCounterForTable(name);
-            System.out.println("id found: " + id);
-             System.out.println("id to save: " + ++id);
-            StringBuffer editSQL = new StringBuffer("INSERT INTO " + name.toUpperCase() + "(ID");
-            StringBuffer valuesSQL = new StringBuffer(" VALUES(" + id);
-            for (Map.Entry<String, String> column : columns.entrySet()) {
-                editSQL.append(", ");
-                valuesSQL.append(", ");
-               // System.out.println("column name: " + column.getKey().toUpperCase());
-                //System.out.println("column type: " + column.getValue());
-                editSQL.append(column.getKey().toUpperCase());
-                valuesSQL.append(column.getValue());
-            }
-            editSQL.append(")");
-            valuesSQL.append(")");
+            StringBuffer getSQL = new StringBuffer("SELECT * FROM " + name.toUpperCase() + " WHERE ID=" + id);
+            ResultSet rs = statement.executeQuery(getSQL.toString());
 
-            editSQL.append(valuesSQL.toString());
-            System.out.println("editSQL: " + editSQL);
-           statement.executeUpdate(editSQL.toString());
+            while (rs.next()) {
+                results.put("id", rs.getString("id"));
+                results.put("temperature", rs.getString("temperature"));
+                results.put("humidity", rs.getString("humidity"));
+                results.put("windspeedKmph", rs.getString("windspeedKmph"));
+                results.put("uvIndex", rs.getString("uvIndex"));
+                results.put("weatherDesc", rs.getString("weatherDesc"));
+                results.put("createDate", rs.getString("createDate"));
+                results.put("weatherDate", rs.getString("weatherDate"));
+                results.put("town", rs.getString("town"));
+                
+            }
+            connection.close();
+            return results;
+        } catch (SQLException ex) {
+            Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
+
+    public static void editDataInTable(String name, int id, HashMap<String, String> columns) {
+        try {
+            Connection connection = connect();
+            Statement statement = connection.createStatement();
+            HashMap<String, String> result = getDataFromTable(name, id);
+            if (result != null) {
+                addDataInTable(name, id, columns);
+            }
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    private static void addDataInTable(String name, int id, HashMap<String, String> columns) {
+        try {
+            Connection connection = connect();
+            Statement statement = connection.createStatement();
+            StringBuffer query = new StringBuffer();
+            if (id == -1) {
+                System.out.println("add new row in db");
+                id = getCounterForTable(name);
+                query.append("INSERT INTO " + name.toUpperCase() + "(ID");
+                System.out.println("id found: " + id);
+                System.out.println("id to save: " + ++id);
+                StringBuffer valuesSQL = new StringBuffer(" VALUES(" + id);
+                for (Map.Entry<String, String> column : columns.entrySet()) {
+                    query.append(", ");
+                    valuesSQL.append(", ");
+                    // System.out.println("column name: " + column.getKey().toUpperCase());
+                    //System.out.println("column type: " + column.getValue());
+                    query.append(column.getKey().toUpperCase());
+                    valuesSQL.append(column.getValue());
+                }
+                query.append(")");
+                valuesSQL.append(")");
+                query.append(valuesSQL.toString());
+            } else {
+                System.out.println("update a row in db");
+                query.append("UPDATE " + name.toUpperCase() + " SET ");
+                for (Map.Entry<String, String> column : columns.entrySet()) {
+                    query.append(column.getKey().toUpperCase() + " = " + column.getValue() + ", ");
+                }
+                query.deleteCharAt(query.length() - 2);
+                query.append(" WHERE ID = " + id);
+            }
+
+            System.out.println("editSQL: " + query);
+            statement.executeUpdate(query.toString());
             statement.close();
             connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public static void addDataInTable(String name, HashMap<String, String> columns) {
+        addDataInTable(name, -1, columns);
     }
 
 }
