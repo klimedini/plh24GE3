@@ -5,6 +5,7 @@
 package gr.eap.myteam.plh24ge3.db;
 
 import gr.eap.myteam.plh24ge3.Plh24GE3;
+import gr.eap.myteam.plh24ge3.models.Weather;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -128,8 +129,8 @@ public class DbUtil {
         return -1;
     }
 
-    public static HashMap<String, String> getDataFromTable(String name, int id) {
-        HashMap<String, String> results = new HashMap<>();
+    public static Weather getDataFromTable(String name, int id) {
+        Weather results = new Weather();
         try {
             Connection connection = connect();
             Statement statement = connection.createStatement();
@@ -137,15 +138,15 @@ public class DbUtil {
             ResultSet rs = statement.executeQuery(getSQL.toString());
 
             while (rs.next()) {
-                results.put("id", rs.getString("id"));
-                results.put("temperature", rs.getString("temperature"));
-                results.put("humidity", rs.getString("humidity"));
-                results.put("windspeedKmph", rs.getString("windspeedKmph"));
-                results.put("uvIndex", rs.getString("uvIndex"));
-                results.put("weatherDesc", rs.getString("weatherDesc"));
-                results.put("createDate", rs.getString("createDate"));
-                results.put("weatherDate", rs.getString("weatherDate"));
-                results.put("town", rs.getString("town"));
+                results.setId(rs.getInt("id"));
+                results.setTemperature(rs.getInt("temperature"));
+                results.setHumidity(rs.getInt("humidity"));
+                results.setWindspeedKmph(rs.getInt("windspeedKmph"));
+                results.setUvIndex(rs.getInt("uvIndex"));
+                results.setWeatherDesc(rs.getString("weatherDesc"));
+                results.setCreateDate(rs.getString("createDate"));
+                results.setWeatherDate(rs.getString("weatherDate"));
+                results.setTown(rs.getString("town"));
 
             }
             connection.close();
@@ -157,11 +158,11 @@ public class DbUtil {
 
     }
 
-    public static void editDataInTable(String name, int id, HashMap<String, String> columns) {
+    public static void editDataInTable(String name, int id, Weather columns) {
         try {
             Connection connection = connect();
             Statement statement = connection.createStatement();
-            HashMap<String, String> result = getDataFromTable(name, id);
+            Weather result = getDataFromTable(name, id);
             if (result != null) {
                 addDataInTable(name, id, columns);
             }
@@ -172,41 +173,23 @@ public class DbUtil {
 
     }
 
-    private static void addDataInTable(String name, int id, HashMap<String, String> columns) {
+    private static void addDataInTable(String name, int id, Weather columns) {
         try {
             Connection connection = connect();
             Statement statement = connection.createStatement();
-            StringBuffer query = new StringBuffer();
+            String query = "";
             if (id == -1) {
                 System.out.println("add new row in db");
-                id = getCounterForTable(name);
-                query.append("INSERT INTO " + name.toUpperCase() + "(ID");
-                System.out.println("id found: " + id);
-                System.out.println("id to save: " + ++id);
-                StringBuffer valuesSQL = new StringBuffer(" VALUES(" + id);
-                for (Map.Entry<String, String> column : columns.entrySet()) {
-                    query.append(", ");
-                    valuesSQL.append(", ");
-                    // System.out.println("column name: " + column.getKey().toUpperCase());
-                    //System.out.println("column type: " + column.getValue());
-                    query.append(column.getKey().toUpperCase());
-                    valuesSQL.append(column.getValue());
-                }
-                query.append(")");
-                valuesSQL.append(")");
-                query.append(valuesSQL.toString());
+                id = getCounterForTable(name)+1;
+                System.out.println("new id: " + id);
+               query = columns.getCreateQuery().replace("--id--", String.valueOf(id));
+               System.out.println(query);
             } else {
-                System.out.println("update a row in db");
-                query.append("UPDATE " + name.toUpperCase() + " SET ");
-                for (Map.Entry<String, String> column : columns.entrySet()) {
-                    query.append(column.getKey().toUpperCase() + " = " + column.getValue() + ", ");
-                }
-                query.deleteCharAt(query.length() - 2);
-                query.append(" WHERE ID = " + id);
+                query = columns.getUpdateQuery();
             }
 
             System.out.println("editSQL: " + query);
-            statement.executeUpdate(query.toString());
+            statement.executeUpdate(query);
             statement.close();
             connection.close();
         } catch (SQLException ex) {
@@ -214,7 +197,7 @@ public class DbUtil {
         }
     }
 
-    public static void addDataInTable(String name, HashMap<String, String> columns) {
+    public static void addDataInTable(String name, Weather columns) {
         addDataInTable(name, -1, columns);
     }
 

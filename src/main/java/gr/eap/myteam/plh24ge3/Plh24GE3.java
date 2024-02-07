@@ -4,6 +4,7 @@
 package gr.eap.myteam.plh24ge3;
 
 import gr.eap.myteam.plh24ge3.db.DbUtil;
+import gr.eap.myteam.plh24ge3.models.Weather;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,30 +24,18 @@ public class Plh24GE3 {
     public static void main(String[] args) {
         System.out.println("Hello World!");
         System.out.println("test");
-
-        HashMap<String, String> columns = new HashMap<>();
         Date now = new Date();
-        columns.put("temperature", "3250");
-        columns.put("humidity", "3260");
-        columns.put("windspeedKmph", "3220");
-        columns.put("uvIndex", "325");
-        columns.put("weatherDesc", "'32sunny'");
-        columns.put("createDate", "'" + timestamp.format(now) + "'");
-        columns.put("weatherDate", "'" + sdf.format(now) + "'");
-        columns.put("town", "'athens'");
-
-        HashMap<String, String> results = DbUtil.getDataFromTable("weather", 1);
-        for (Map.Entry<String, String> column : results.entrySet()) {
-            System.out.println("before: " +column.getKey() + " : " + column.getValue());
-        }
-        //DbUtil.editDataInTable("weather", 1, columns);
-        results = DbUtil.getDataFromTable("weather", 1);
-        for (Map.Entry<String, String> column : results.entrySet()) {
-            System.out.println("after: " +column.getKey() + " : " + column.getValue());
-        }
+        Weather columns = new Weather(15, 70, 10, 3, "kalws2", timestamp.format(now) ,  sdf.format(now) , "athens");
+//DbUtil.addDataInTable("weather", columns);
+        Weather results = DbUtil.getDataFromTable("weather", 4);
+        System.out.println(results.toString());
+        results.setWeatherDesc("kalws4");
         
-        //DbUtil.deleteDataFromTable("weather", 4);
+        DbUtil.editDataInTable("weather", results.getId(), results);
+        results = DbUtil.getDataFromTable("weather", results.getId());
+        System.out.println(results.toString());
 
+        //DbUtil.deleteDataFromTable("weather", 4);
     }
 
 }
