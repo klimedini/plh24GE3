@@ -1,6 +1,7 @@
+package gr.eap.myteam.plh24ge3.GuiGe3;
 
-import gr.eap.myteam.plh24ge3.GuiGe3.GuiGe3_1;
-import javafx.scene.paint.Color;
+
+
 
 
 

@@ -4,6 +4,7 @@
 package gr.eap.myteam.plh24ge3;
 
 import gr.eap.myteam.plh24ge3.GE3GUI.GE3GUI;
+import gr.eap.myteam.plh24ge3.GuiGe3.GuiGe3;
 import gr.eap.myteam.plh24ge3.db.DbUtil;
 import gr.eap.myteam.plh24ge3.models.Weather;
 import java.text.SimpleDateFormat;
@@ -36,7 +37,7 @@ public class Plh24GE3 {
 //        results = DbUtil.getDataFromTable("weather", results.getId());
 //        System.out.println(results.toString());
         
-        new GE3GUI().setVisible(true);
+        new GuiGe3().setVisible(true);
 
         //DbUtil.deleteDataFromTable("weather", 4);
     }
