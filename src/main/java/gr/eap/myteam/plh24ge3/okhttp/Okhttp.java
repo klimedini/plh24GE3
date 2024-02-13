@@ -15,7 +15,7 @@ import okhttp3.Response;
  */
 public class Okhttp {
 
-    public void connect() {
+    public static void connect() {
         String urlToCall
                 = " your url goes here";
 
