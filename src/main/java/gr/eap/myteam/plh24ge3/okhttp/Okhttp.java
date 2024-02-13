@@ -4,6 +4,11 @@
  */
 package gr.eap.myteam.plh24ge3.okhttp;
 
+import java.io.IOException;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 /**
  *
  * @author alex
@@ -22,11 +27,9 @@ public class Okhttp {
             if (response.isSuccessful() && response.body() != null) {
                 String responseString = response.body().string();
                 System.out.println(responseString);
-                return responseString;
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
 
     }
