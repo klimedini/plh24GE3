@@ -20,7 +20,7 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         openDataMenu = new javax.swing.JButton();
         viewPrintStats = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        exit = new javax.swing.JButton();
         cityList = new javax.swing.JButton();
         dateList = new javax.swing.JButton();
 
@@ -50,9 +50,14 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 153, 153));
-        jButton3.setText("Έξοδος");
+        exit.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
+        exit.setForeground(new java.awt.Color(0, 153, 153));
+        exit.setText("Έξοδος");
+        exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitActionPerformed(evt);
+            }
+        });
 
         cityList.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         cityList.setForeground(new java.awt.Color(0, 153, 153));
@@ -87,7 +92,7 @@ public class MainMenu extends javax.swing.JFrame {
                             .addComponent(viewPrintStats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(100, 100, 100))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(exit)
                         .addGap(195, 195, 195))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -106,7 +111,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(viewPrintStats)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(exit)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -129,6 +134,10 @@ public class MainMenu extends javax.swing.JFrame {
     private void viewPrintStatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewPrintStatsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_viewPrintStatsActionPerformed
+
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+        new MainMenu().dispose();
+    }//GEN-LAST:event_exitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,7 +172,7 @@ public class MainMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cityList;
     private javax.swing.JButton dateList;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton openDataMenu;
     private javax.swing.JButton viewPrintStats;

@@ -216,7 +216,7 @@ public class DataMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_backActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-        // TODO add your handling code here:
+        new DataMenu().dispose();
     }//GEN-LAST:event_exitActionPerformed
 
     private void processCityDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processCityDataActionPerformed
