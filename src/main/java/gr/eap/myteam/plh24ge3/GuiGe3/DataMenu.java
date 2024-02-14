@@ -1,5 +1,8 @@
 package gr.eap.myteam.plh24ge3.GuiGe3;
 
+import gr.eap.myteam.plh24ge3.GuiGe3.MainMenu;
+
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -208,7 +211,8 @@ public class DataMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_showCityDataActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-        // TODO add your handling code here:
+        new MainMenu().setVisible(true);
+        new DataMenu().dispose();            
     }//GEN-LAST:event_backActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
