@@ -34,8 +34,6 @@ public class DataMenu extends javax.swing.JFrame {
         enterCityName = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         showCityData = new javax.swing.JButton();
-        deleteCityData = new javax.swing.JButton();
-        processCityData = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         back = new javax.swing.JButton();
         exit = new javax.swing.JButton();
@@ -65,24 +63,6 @@ public class DataMenu extends javax.swing.JFrame {
         showCityData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showCityDataActionPerformed(evt);
-            }
-        });
-
-        deleteCityData.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
-        deleteCityData.setForeground(new java.awt.Color(0, 153, 153));
-        deleteCityData.setText("Διαγραφή Δεδομένων πόλης");
-        deleteCityData.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteCityDataActionPerformed(evt);
-            }
-        });
-
-        processCityData.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
-        processCityData.setForeground(new java.awt.Color(0, 153, 153));
-        processCityData.setText("Επεξεργασία Δεδομένων Πόλης");
-        processCityData.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                processCityDataActionPerformed(evt);
             }
         });
 
@@ -160,12 +140,7 @@ public class DataMenu extends javax.swing.JFrame {
                         .addGap(166, 166, 166)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(exit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(deleteCityData, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(processCityData))))
+                            .addComponent(exit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -189,14 +164,10 @@ public class DataMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(deleteCityData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(processCityData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(21, 21, 21))
+                .addGap(79, 79, 79))
         );
 
         pack();
@@ -218,14 +189,6 @@ public class DataMenu extends javax.swing.JFrame {
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         new DataMenu().dispose();
     }//GEN-LAST:event_exitActionPerformed
-
-    private void processCityDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processCityDataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_processCityDataActionPerformed
-
-    private void deleteCityDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCityDataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_deleteCityDataActionPerformed
 
     /**
      * @param args the command line arguments
@@ -265,7 +228,6 @@ public class DataMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
-    private javax.swing.JButton deleteCityData;
     private javax.swing.JTextField enterCityName;
     private javax.swing.JButton exit;
     private javax.swing.JButton jButton1;
@@ -275,7 +237,6 @@ public class DataMenu extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JButton processCityData;
     private javax.swing.JButton showCityData;
     // End of variables declaration//GEN-END:variables
 }
