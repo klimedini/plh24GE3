@@ -3,8 +3,7 @@
  */
 package gr.eap.myteam.plh24ge3;
 
-import gr.eap.myteam.plh24ge3.GE3GUI.GE3GUI;
-import gr.eap.myteam.plh24ge3.GuiGe3.GuiGe3;
+import gr.eap.myteam.plh24ge3.GuiGe3.MainMenu;
 import gr.eap.myteam.plh24ge3.db.DbUtil;
 import gr.eap.myteam.plh24ge3.models.Weather;
 import gr.eap.myteam.plh24ge3.okhttp.Okhttp;
@@ -38,9 +37,9 @@ public class Plh24GE3 {
 //        results = DbUtil.getDataFromTable("weather", results.getId());
 //        System.out.println(results.toString());
         
-        new GuiGe3().setVisible(true);
+        new MainMenu().setVisible(true);
         
-        Okhttp.connect();
+        //Okhttp.connect();
 
         //DbUtil.deleteDataFromTable("weather", 4);
     }

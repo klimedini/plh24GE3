@@ -1,6 +1,7 @@
+package gr.eap.myteam.plh24ge3.GuiGe3;
+
 
 import gr.eap.myteam.plh24ge3.GuiGe3.DataMenu;
-import javafx.scene.paint.Color;
 
 
 
@@ -136,7 +137,9 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_viewPrintStatsActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-        new MainMenu().dispose();
+        System.out.println("test exit");
+        this.dispose();
+        
     }//GEN-LAST:event_exitActionPerformed
 
     /**
