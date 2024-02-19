@@ -4,14 +4,22 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import gr.eap.myteam.plh24ge3.GuiGe3.MainMenu;
+import gr.eap.myteam.plh24ge3.db.DbUtil;
+import gr.eap.myteam.plh24ge3.models.Weather;
 import gr.eap.myteam.plh24ge3.okhttp.Okhttp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author gnikol
@@ -52,6 +60,7 @@ public class DataMenu extends javax.swing.JFrame {
         windLabel = new javax.swing.JTextField();
         uvLabel = new javax.swing.JTextField();
         descriptionLabel = new javax.swing.JTextField();
+        showCityData1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFont(new java.awt.Font("Sitka Small", 2, 12)); // NOI18N
@@ -69,10 +78,11 @@ public class DataMenu extends javax.swing.JFrame {
 
         showCityData.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         showCityData.setForeground(new java.awt.Color(0, 153, 153));
-        showCityData.setText("Προβολή Δεδομένων");
+        showCityData.setText("Αποθήκευση Δεδομένων");
+        showCityData.setActionCommand("Αποθήκευση Δεδομένων");
         showCityData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showCityDataActionPerformed(evt);
+                saveData(evt);
             }
         });
 
@@ -136,6 +146,15 @@ public class DataMenu extends javax.swing.JFrame {
 
         descriptionLabel.setEditable(false);
 
+        showCityData1.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
+        showCityData1.setForeground(new java.awt.Color(0, 153, 153));
+        showCityData1.setText("Προβολή Δεδομένων");
+        showCityData1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showCityData(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -152,9 +171,6 @@ public class DataMenu extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(168, 168, 168)
                         .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(307, 307, 307)
-                        .addComponent(showCityData))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -183,7 +199,12 @@ public class DataMenu extends javax.swing.JFrame {
                                 .addComponent(uvLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(descriptionLabel))
-                            .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(showCityData)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(showCityData1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -196,8 +217,10 @@ public class DataMenu extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jButton6))
                 .addGap(43, 43, 43)
-                .addComponent(showCityData, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(showCityData, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(showCityData1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -211,7 +234,7 @@ public class DataMenu extends javax.swing.JFrame {
                     .addComponent(windLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(uvLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -225,9 +248,28 @@ public class DataMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_townNameActionPerformed
 
-    private void showCityDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCityDataActionPerformed
+    private void saveData(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveData
         // TODO add your handling code here:
-    }//GEN-LAST:event_showCityDataActionPerformed
+        if (this.tempLabel != null) {
+            Weather results = new Weather(Integer.valueOf(tempLabel.getText()),
+                    Integer.valueOf(humidityLabel.getText()), Integer.valueOf(windLabel.getText()),
+                    Integer.valueOf(uvLabel.getText()), descriptionLabel.getText(), timestamp.format(new Date()),
+                    sdf.format(localObsDateTime), townName.getText());
+            ArrayList<Weather> savedResults = DbUtil.getDataFromTableWithName("weather", townName.getText());
+            boolean found = false;
+            for(int i=0;i<savedResults.size();i++){
+                Weather row = savedResults.get(i);
+                if(row.getWeatherDate().equalsIgnoreCase(sdf.format(localObsDateTime))){
+                    System.out.println("data found in db no need to save again");
+                    found = true;
+                    break;
+                }
+            }
+            if(!found){
+                DbUtil.addDataInTable("weather", results);
+            }
+        }
+    }//GEN-LAST:event_saveData
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         new MainMenu().setVisible(true);
@@ -241,9 +283,9 @@ public class DataMenu extends javax.swing.JFrame {
     private void search(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search
         // TODO add your hanokhtdling code here:
         String townName = this.townName.getText();
-        if(townName != null){
+        if (townName != null) {
             JsonObject results = Okhttp.connect(townName);
-            if(results != null){
+            if (results != null) {
                 JsonArray current_condition = results.getAsJsonArray("current_condition");
                 JsonObject current_conditionJson = current_condition.get(0).getAsJsonObject();
                 String temp_C = current_conditionJson.get("temp_C").getAsString();
@@ -256,10 +298,20 @@ public class DataMenu extends javax.swing.JFrame {
                 this.windLabel.setText(windspeedKmph);
                 this.uvLabel.setText(uvIndex);
                 this.descriptionLabel.setText(weatherDesc);
+                try {
+                    System.out.println(current_conditionJson.get("localObsDateTime").getAsString());
+                    this.localObsDateTime = sdfA.parse("2024-02-19 06:24 PM");
+                } catch (ParseException ex) {
+                    Logger.getLogger(DataMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
-        
+
     }//GEN-LAST:event_search
+
+    private void showCityData(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCityData
+        // TODO add your handling code here:
+    }//GEN-LAST:event_showCityData
 
     /**
      * @param args the command line arguments
@@ -297,6 +349,10 @@ public class DataMenu extends javax.swing.JFrame {
         });
     }
 
+    private SimpleDateFormat sdfA = new SimpleDateFormat("yyyy-MM-dd hh:mm aa",Locale.ENGLISH);
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private static SimpleDateFormat timestamp = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    private Date localObsDateTime;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
     private javax.swing.JTextField descriptionLabel;
@@ -311,6 +367,7 @@ public class DataMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton showCityData;
+    private javax.swing.JButton showCityData1;
     private javax.swing.JTextField tempLabel;
     private javax.swing.JTextField townName;
     private javax.swing.JTextField uvLabel;
