@@ -129,7 +129,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void openDataMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openDataMenuActionPerformed
         new DataMenu().setVisible(true);
-        new MainMenu().dispose();
+        this.dispose();
     }//GEN-LAST:event_openDataMenuActionPerformed
 
     private void viewPrintStatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewPrintStatsActionPerformed

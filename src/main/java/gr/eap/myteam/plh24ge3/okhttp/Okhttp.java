@@ -4,6 +4,9 @@
  */
 package gr.eap.myteam.plh24ge3.okhttp;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.io.IOException;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -15,9 +18,10 @@ import okhttp3.Response;
  */
 public class Okhttp {
 
-    public static void connect() {
+    public static JsonObject connect(String townName) {
         String urlToCall
-                = " your url goes here";
+                = "https://wttr.in/"+townName+"?format=j1";
+        System.out.println("urlToCall: " + urlToCall);
 
         OkHttpClient client = new OkHttpClient();
 
@@ -27,11 +31,15 @@ public class Okhttp {
             if (response.isSuccessful() && response.body() != null) {
                 String responseString = response.body().string();
                 System.out.println(responseString);
+                JsonObject responseJson = new Gson().fromJson(responseString, JsonObject.class);
+                return responseJson;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        return null;
     }
+    
+    
 
 }

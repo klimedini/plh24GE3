@@ -8,6 +8,7 @@ import gr.eap.myteam.plh24ge3.db.DbUtil;
 import gr.eap.myteam.plh24ge3.models.Weather;
 import gr.eap.myteam.plh24ge3.okhttp.Okhttp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +35,10 @@ public class Plh24GE3 {
 //        results.setWeatherDesc("kalws4");
         
 //        DbUtil.editDataInTable("weather", results.getId(), results);
-//        results = DbUtil.getDataFromTable("weather", results.getId());
+//        ArrayList<Weather> results = DbUtil.getDataFromTableWithName("weather", "athens");
+//        results.forEach(name -> {
+//            System.out.println(name);
+//        });
 //        System.out.println(results.toString());
         
         new MainMenu().setVisible(true);

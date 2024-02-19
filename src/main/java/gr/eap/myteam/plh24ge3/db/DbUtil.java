@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -129,24 +130,57 @@ public class DbUtil {
         return -1;
     }
 
-    public static Weather getDataFromTable(String name, int id) {
-        Weather results = new Weather();
+    public static ArrayList<Weather> getDataFromTableWithId(String tableName, int id) {
+        ArrayList<Weather> results = new ArrayList<Weather>();
         try {
             Connection connection = connect();
             Statement statement = connection.createStatement();
-            StringBuffer getSQL = new StringBuffer("SELECT * FROM " + name.toUpperCase() + " WHERE ID=" + id);
+            StringBuffer getSQL = new StringBuffer("SELECT * FROM " + tableName.toUpperCase() + " WHERE ID=" + id);
             ResultSet rs = statement.executeQuery(getSQL.toString());
 
             while (rs.next()) {
-                results.setId(rs.getInt("id"));
-                results.setTemperature(rs.getInt("temperature"));
-                results.setHumidity(rs.getInt("humidity"));
-                results.setWindspeedKmph(rs.getInt("windspeedKmph"));
-                results.setUvIndex(rs.getInt("uvIndex"));
-                results.setWeatherDesc(rs.getString("weatherDesc"));
-                results.setCreateDate(rs.getString("createDate"));
-                results.setWeatherDate(rs.getString("weatherDate"));
-                results.setTown(rs.getString("town"));
+                Weather row = new Weather();
+                row.setId(rs.getInt("id"));
+                row.setTemperature(rs.getInt("temperature"));
+                row.setHumidity(rs.getInt("humidity"));
+                row.setWindspeedKmph(rs.getInt("windspeedKmph"));
+                row.setUvIndex(rs.getInt("uvIndex"));
+                row.setWeatherDesc(rs.getString("weatherDesc"));
+                row.setCreateDate(rs.getString("createDate"));
+                row.setWeatherDate(rs.getString("weatherDate"));
+                row.setTown(rs.getString("town"));
+                results.add(row);
+
+            }
+            connection.close();
+            return results;
+        } catch (SQLException ex) {
+            Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public static ArrayList<Weather> getDataFromTableWithName(String tableName, String townName) {
+        ArrayList<Weather> results = new ArrayList<Weather>();
+        try {
+            Connection connection = connect();
+            Statement statement = connection.createStatement();
+            StringBuffer getSQL = new StringBuffer("SELECT * FROM " + tableName.toUpperCase() + " WHERE TOWN = '" + townName+"'");
+            System.out.println(getSQL.toString());
+            ResultSet rs = statement.executeQuery(getSQL.toString());
+
+            while (rs.next()) {
+                Weather row = new Weather();
+                row.setId(rs.getInt("id"));
+                row.setTemperature(rs.getInt("temperature"));
+                row.setHumidity(rs.getInt("humidity"));
+                row.setWindspeedKmph(rs.getInt("windspeedKmph"));
+                row.setUvIndex(rs.getInt("uvIndex"));
+                row.setWeatherDesc(rs.getString("weatherDesc"));
+                row.setCreateDate(rs.getString("createDate"));
+                row.setWeatherDate(rs.getString("weatherDate"));
+                row.setTown(rs.getString("town"));
+                results.add(row);
 
             }
             connection.close();
@@ -162,7 +196,7 @@ public class DbUtil {
         try {
             Connection connection = connect();
             Statement statement = connection.createStatement();
-            Weather result = getDataFromTable(name, id);
+            ArrayList<Weather> result = getDataFromTableWithId(name, id);
             if (result != null) {
                 addDataInTable(name, id, columns);
             }
