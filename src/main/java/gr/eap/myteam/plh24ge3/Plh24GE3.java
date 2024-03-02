@@ -45,7 +45,10 @@ public class Plh24GE3 {
         
         //Okhttp.connect();
 
-        //DbUtil.deleteDataFromTable("weather", 4);
+        
+                
+
+
     }
 
 }

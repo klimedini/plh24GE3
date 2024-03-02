@@ -33,7 +33,7 @@ public class DataView extends javax.swing.JFrame {
         initComponents();
         townNameTitle.setText(townName);
          DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-        ArrayList<Weather> results = DbUtil.getDataFromTableWithName("weather",townName);
+        ArrayList<Weather> results = DbUtil.getDataFromWeatherTableWithName(townName);
         for(int i=0;i<results.size();i++){
             Weather data = results.get(i);
             System.out.println(data);
@@ -315,7 +315,7 @@ public class DataView extends javax.swing.JFrame {
             Weather data = new Weather(Integer.valueOf(this.idField.getText()), Integer.valueOf(this.tempLabel.getText()), Integer.valueOf(this.humidityLabel.getText()),
                     Integer.valueOf(this.windLabel.getText()), 
            Integer.valueOf( this.uvLabel.getText()), this.descriptionLabel.getText(), createDate, weatherDate, townNameTitle.getText());
-            DbUtil.editDataInTable("weather", Integer.valueOf(this.idField.getText()), data);
+            DbUtil.editDataInWeatherTable( Integer.valueOf(this.idField.getText()), data);
 
         }
     }//GEN-LAST:event_processCityDataActionPerformed

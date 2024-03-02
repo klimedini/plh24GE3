@@ -5,6 +5,7 @@
 package gr.eap.myteam.plh24ge3.db;
 
 import gr.eap.myteam.plh24ge3.Plh24GE3;
+import gr.eap.myteam.plh24ge3.models.Searches;
 import gr.eap.myteam.plh24ge3.models.Weather;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -40,6 +41,13 @@ public class DbUtil {
 //        columns.put("createDate", "timestamp not null");
 //        columns.put("weatherDate", "date not null");
 //        columns.put("town", "varchar(100) not null");
+    
+//HashMap<String,String> columns = new HashMap<>();
+//        columns.put("town", "varchar(100) not null");
+//        columns.put("timesSearched", "integer not null");
+//        DbUtil.createTable("searches", columns);
+
+    
 // TEST DATA FOR TABLE WEATHER 
 //    HashMap<String,String> columns = new HashMap<>();
 //    Date now = new Date();
@@ -58,12 +66,26 @@ public class DbUtil {
             String connectionString = protocol + "./derbyDB;create=true";
             Connection connection = DriverManager.getConnection(connectionString);
             System.out.println("connect successful");
+            
+            
             return connection;
         } catch (Exception ex) {
             Logger.getLogger(Plh24GE3.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
+    public static void dropTable(String name) {
+        try {
+            Connection connection = connect();
+            Statement statement = connection.createStatement();
+            StringBuffer deleteSQL = new StringBuffer("DROP TABLE " + name.toUpperCase());
+            statement.execute(deleteSQL.toString());
+            connection.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+    }
+    
 
     public static void deleteDataFromTable(String name, int id) {
         try {
@@ -130,12 +152,12 @@ public class DbUtil {
         return -1;
     }
 
-    public static ArrayList<Weather> getDataFromTableWithId(String tableName, int id) {
+    public static ArrayList<Weather> getDataFromweatherTableWithId( int id) {
         ArrayList<Weather> results = new ArrayList<Weather>();
         try {
             Connection connection = connect();
             Statement statement = connection.createStatement();
-            StringBuffer getSQL = new StringBuffer("SELECT * FROM " + tableName.toUpperCase() + " WHERE ID=" + id);
+            StringBuffer getSQL = new StringBuffer("SELECT * FROM WEATHER WHERE ID=" + id);
             ResultSet rs = statement.executeQuery(getSQL.toString());
 
             while (rs.next()) {
@@ -160,15 +182,65 @@ public class DbUtil {
         return null;
     }
     
+        public static ArrayList<Searches> getDataFromSearchesTableWithId( int id) {
+        ArrayList<Searches> results = new ArrayList<Searches>();
+        try {
+            Connection connection = connect();
+            Statement statement = connection.createStatement();
+            StringBuffer getSQL = new StringBuffer("SELECT * FROM SEARCHES WHERE ID=" + id);
+            ResultSet rs = statement.executeQuery(getSQL.toString());
+
+            while (rs.next()) {
+               Searches row = new Searches();
+                row.setId(rs.getInt("id"));
+                row.setTimesSearched(rs.getInt("timesSearched"));
+                row.setTown(rs.getString("town"));
+                results.add(row);
+
+            }
+            connection.close();
+            return results;
+        } catch (SQLException ex) {
+            Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
     
-    public static ArrayList<Weather> getDataFromTableWithName(String tableName, String townName) {
+    public static ArrayList<Searches> getDataFromSearchesTableWithName(String townName) {
+        ArrayList<Searches> results = new ArrayList<Searches>();
+        try {
+            
+            Connection connection = connect();
+            Statement statement = connection.createStatement();
+            StringBuffer getSQL = new StringBuffer("SELECT * FROM SEARCHES WHERE TOWN = '" + townName+"'");
+            System.out.println(getSQL.toString());
+            ResultSet rs = statement.executeQuery(getSQL.toString());
+
+            while (rs.next()) {
+                Searches row = new Searches();
+                row.setId(rs.getInt("id"));
+                row.setTimesSearched(rs.getInt("timesSearched"));
+                row.setTown(rs.getString("town"));
+                results.add(row);
+
+            }
+            connection.close();
+            return results;
+        } catch (SQLException ex) {
+            Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    
+    public static ArrayList<Weather> getDataFromWeatherTableWithName(String townName) {
         ArrayList<Weather> results = new ArrayList<Weather>();
         try {
             
             Connection connection = connect();
             Statement statement = connection.createStatement();
-            StringBuffer getSQL = new StringBuffer("SELECT * FROM " + tableName.toUpperCase() + " WHERE TOWN = '" + townName+"'");
+            StringBuffer getSQL = new StringBuffer("SELECT * FROM WEATHER WHERE TOWN = '" + townName+"'");
             System.out.println(getSQL.toString());
             ResultSet rs = statement.executeQuery(getSQL.toString());
 
@@ -195,12 +267,12 @@ public class DbUtil {
 
     }
     
-    public static ArrayList<Weather> getDataFromTable(String tableName) {
+    public static ArrayList<Weather> getDataFromWeatherTable() {
         ArrayList<Weather> results = new ArrayList<Weather>();
         try {
             Connection connection = connect();
             Statement statement = connection.createStatement();
-            StringBuffer getSQL = new StringBuffer("SELECT * FROM " + tableName.toUpperCase());
+            StringBuffer getSQL = new StringBuffer("SELECT * FROM WEATHER");
             System.out.println(getSQL.toString());
             ResultSet rs = statement.executeQuery(getSQL.toString());
 
@@ -227,13 +299,13 @@ public class DbUtil {
 
     }
 
-    public static void editDataInTable(String name, int id, Weather columns) {
+    public static void editDataInWeatherTable( int id, Weather columns) {
         try {
             Connection connection = connect();
             Statement statement = connection.createStatement();
-            ArrayList<Weather> result = getDataFromTableWithId(name, id);
+            ArrayList<Weather> result = getDataFromweatherTableWithId(id);
             if (result != null) {
-                addDataInTable(name, id, columns);
+                addDataInWeatherTable( id, columns);
             }
             connection.close();
         } catch (SQLException ex) {
@@ -241,15 +313,54 @@ public class DbUtil {
         }
 
     }
+        public static void editDataInSearchesTable( int id, Searches columns) {
+        try {
+            Connection connection = connect();
+            Statement statement = connection.createStatement();
+            ArrayList<Searches> result = getDataFromSearchesTableWithId(id);
+            if (result != null) {
+                addDataInSearchesTable( id, columns);
+            }
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-    private static void addDataInTable(String name, int id, Weather columns) {
+    }
+    
+
+    private static void addDataInWeatherTable( int id, Weather columns) {
         try {
             Connection connection = connect();
             Statement statement = connection.createStatement();
             String query = "";
             if (id == -1) {
                 System.out.println("add new row in db");
-                id = getCounterForTable(name)+1;
+                id = getCounterForTable("WEATHER")+1;
+                System.out.println("new id: " + id);
+               query = columns.getCreateQuery().replace("--id--", String.valueOf(id));
+               System.out.println(query);
+            } else {
+                query = columns.getUpdateQuery();
+            }
+
+            System.out.println("editSQL: " + query);
+            statement.executeUpdate(query);
+            statement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+        private static void addDataInSearchesTable( int id, Searches columns) {
+        try {
+            Connection connection = connect();
+            Statement statement = connection.createStatement();
+            String query = "";
+            if (id == -1) {
+                System.out.println("add new row in db");
+                id = getCounterForTable("SEARCHES")+1;
                 System.out.println("new id: " + id);
                query = columns.getCreateQuery().replace("--id--", String.valueOf(id));
                System.out.println(query);
@@ -266,8 +377,12 @@ public class DbUtil {
         }
     }
 
-    public static void addDataInTable(String name, Weather columns) {
-        addDataInTable(name, -1, columns);
+    public static void addDataWeatherInTable( Weather columns) {
+        addDataInWeatherTable( -1, columns);
+    }
+    
+    private static void addDataInSearchesTable(Searches columns) {
+        addDataInSearchesTable(-1, columns);
     }
 
 }

@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import gr.eap.myteam.plh24ge3.GuiGe3.MainMenu;
 import gr.eap.myteam.plh24ge3.db.DbUtil;
+import gr.eap.myteam.plh24ge3.models.Searches;
 import gr.eap.myteam.plh24ge3.models.Weather;
 import gr.eap.myteam.plh24ge3.okhttp.Okhttp;
 import java.text.ParseException;
@@ -255,7 +256,7 @@ public class DataMenu extends javax.swing.JFrame {
                     Integer.valueOf(humidityLabel.getText()), Integer.valueOf(windLabel.getText()),
                     Integer.valueOf(uvLabel.getText()), descriptionLabel.getText(), timestamp.format(new Date()),
                     sdf.format(localObsDateTime), townName.getText());
-            ArrayList<Weather> savedResults = DbUtil.getDataFromTableWithName("weather", townName.getText());
+            ArrayList<Weather> savedResults = DbUtil.getDataFromWeatherTableWithName(townName.getText());
             boolean found = false;
             for(int i=0;i<savedResults.size();i++){
                 Weather row = savedResults.get(i);
@@ -266,7 +267,7 @@ public class DataMenu extends javax.swing.JFrame {
                 }
             }
             if(!found){
-                DbUtil.addDataInTable("weather", results);
+                DbUtil.addDataWeatherInTable( results);
             }
         }
     }//GEN-LAST:event_saveData
@@ -298,6 +299,12 @@ public class DataMenu extends javax.swing.JFrame {
                 this.windLabel.setText(windspeedKmph);
                 this.uvLabel.setText(uvIndex);
                 this.descriptionLabel.setText(weatherDesc);
+                ArrayList<Searches> searchesResults = DbUtil.getDataFromSearchesTableWithName( townName);
+                if(searchesResults != null && searchesResults.size()>0){
+                   // DbUtil.addDataWeatherInTable(columns);
+                }else{
+                   DbUtil.getDataFromSearchesTableWithName(townName);
+                }
                 try {
                     System.out.println(current_conditionJson.get("localObsDateTime").getAsString());
                     this.localObsDateTime = sdfA.parse("2024-02-19 06:24 PM");
