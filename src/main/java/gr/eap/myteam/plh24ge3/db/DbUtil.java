@@ -160,12 +160,47 @@ public class DbUtil {
         return null;
     }
     
+    
+    
     public static ArrayList<Weather> getDataFromTableWithName(String tableName, String townName) {
+        ArrayList<Weather> results = new ArrayList<Weather>();
+        try {
+            
+            Connection connection = connect();
+            Statement statement = connection.createStatement();
+            StringBuffer getSQL = new StringBuffer("SELECT * FROM " + tableName.toUpperCase() + " WHERE TOWN = '" + townName+"'");
+            System.out.println(getSQL.toString());
+            ResultSet rs = statement.executeQuery(getSQL.toString());
+
+            while (rs.next()) {
+                Weather row = new Weather();
+                row.setId(rs.getInt("id"));
+                row.setTemperature(rs.getInt("temperature"));
+                row.setHumidity(rs.getInt("humidity"));
+                row.setWindspeedKmph(rs.getInt("windspeedKmph"));
+                row.setUvIndex(rs.getInt("uvIndex"));
+                row.setWeatherDesc(rs.getString("weatherDesc"));
+                row.setCreateDate(rs.getString("createDate"));
+                row.setWeatherDate(rs.getString("weatherDate"));
+                row.setTown(rs.getString("town"));
+                results.add(row);
+
+            }
+            connection.close();
+            return results;
+        } catch (SQLException ex) {
+            Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
+    
+    public static ArrayList<Weather> getDataFromTable(String tableName) {
         ArrayList<Weather> results = new ArrayList<Weather>();
         try {
             Connection connection = connect();
             Statement statement = connection.createStatement();
-            StringBuffer getSQL = new StringBuffer("SELECT * FROM " + tableName.toUpperCase() + " WHERE TOWN = '" + townName+"'");
+            StringBuffer getSQL = new StringBuffer("SELECT * FROM " + tableName.toUpperCase());
             System.out.println(getSQL.toString());
             ResultSet rs = statement.executeQuery(getSQL.toString());
 

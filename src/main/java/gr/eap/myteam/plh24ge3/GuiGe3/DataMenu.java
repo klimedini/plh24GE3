@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 /*
@@ -79,7 +80,6 @@ public class DataMenu extends javax.swing.JFrame {
         showCityData.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         showCityData.setForeground(new java.awt.Color(0, 153, 153));
         showCityData.setText("Αποθήκευση Δεδομένων");
-        showCityData.setActionCommand("Αποθήκευση Δεδομένων");
         showCityData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveData(evt);
@@ -310,7 +310,17 @@ public class DataMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_search
 
     private void showCityData(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCityData
-        // TODO add your handling code here:
+                // TODO add your handling code here:
+                String townName = this.townName.getText();
+               System.out.println("townName: " + townName);
+               if(townName.equals("")){
+                   JOptionPane.showMessageDialog(this, "Το όναμα πόλης είναι κενό");
+               }else{
+                   new DataView(townName).setVisible(true);
+                   this.dispose();
+               }
+                
+                
     }//GEN-LAST:event_showCityData
 
     /**
