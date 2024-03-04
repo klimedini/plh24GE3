@@ -152,7 +152,7 @@ public class DbUtil {
         return -1;
     }
 
-    public static ArrayList<Weather> getDataFromweatherTableWithId( int id) {
+    public static ArrayList<Weather> getDataFromWeatherTableWithId( int id) {
         ArrayList<Weather> results = new ArrayList<Weather>();
         try {
             Connection connection = connect();
@@ -303,7 +303,7 @@ public class DbUtil {
         try {
             Connection connection = connect();
             Statement statement = connection.createStatement();
-            ArrayList<Weather> result = getDataFromweatherTableWithId(id);
+            ArrayList<Weather> result = getDataFromWeatherTableWithId(id);
             if (result != null) {
                 addDataInWeatherTable( id, columns);
             }
@@ -353,7 +353,7 @@ public class DbUtil {
         }
     }
     
-        private static void addDataInSearchesTable( int id, Searches columns) {
+        public static void addDataInSearchesTable( int id, Searches columns) {
         try {
             Connection connection = connect();
             Statement statement = connection.createStatement();
@@ -381,7 +381,7 @@ public class DbUtil {
         addDataInWeatherTable( -1, columns);
     }
     
-    private static void addDataInSearchesTable(Searches columns) {
+    public static void addDataInSearchesTable(Searches columns) {
         addDataInSearchesTable(-1, columns);
     }
 

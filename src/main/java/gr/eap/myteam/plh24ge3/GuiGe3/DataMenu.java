@@ -250,7 +250,7 @@ public class DataMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_townNameActionPerformed
 
     private void saveData(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveData
-        // TODO add your handling code here:
+        // Save searched data in db into the Weather Table
         if (this.tempLabel != null) {
             Weather results = new Weather(Integer.valueOf(tempLabel.getText()),
                     Integer.valueOf(humidityLabel.getText()), Integer.valueOf(windLabel.getText()),
@@ -282,7 +282,7 @@ public class DataMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_exitActionPerformed
 
     private void search(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search
-        // TODO add your hanokhtdling code here:
+        // Call the api to get the weather data and create/update the Searches table to keep analytics about what the user searced
         String townName = this.townName.getText();
         if (townName != null) {
             JsonObject results = Okhttp.connect(townName);
@@ -301,9 +301,15 @@ public class DataMenu extends javax.swing.JFrame {
                 this.descriptionLabel.setText(weatherDesc);
                 ArrayList<Searches> searchesResults = DbUtil.getDataFromSearchesTableWithName( townName);
                 if(searchesResults != null && searchesResults.size()>0){
-                   // DbUtil.addDataWeatherInTable(columns);
+                    Searches data = searchesResults.get(0);
+                    int timesSearches = data.getTimesSearched();
+                    data.setTimesSearched(++timesSearches);
+                   DbUtil.addDataInSearchesTable(data.getId(),data);
                 }else{
-                   DbUtil.getDataFromSearchesTableWithName(townName);
+                    Searches firstTimeForTown = new Searches();
+                    firstTimeForTown.setTown(townName);
+                    firstTimeForTown.setTimesSearched(1);
+                   DbUtil.addDataInSearchesTable(firstTimeForTown);
                 }
                 try {
                     System.out.println(current_conditionJson.get("localObsDateTime").getAsString());
@@ -317,7 +323,7 @@ public class DataMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_search
 
     private void showCityData(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCityData
-                // TODO add your handling code here:
+                // move to another screen to show data for a specific town
                 String townName = this.townName.getText();
                System.out.println("townName: " + townName);
                if(townName.equals("")){

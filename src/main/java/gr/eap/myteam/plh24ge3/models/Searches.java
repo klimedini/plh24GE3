@@ -54,16 +54,16 @@ public Searches() {
         public String getCreateQuery() {
         StringBuffer query = new StringBuffer("INSERT INTO SEARCHES (ID, TOWN, TIMESSEARCHED)");
         StringBuffer valuesSQL = new StringBuffer(" VALUES( --id--, ");
-        valuesSQL.append(getTown() + ", ");
-        valuesSQL.append(getTimesSearched() + "'");
+        valuesSQL.append("'" +getTown()+"'" + ", ");
+        valuesSQL.append(getTimesSearched());
         valuesSQL.append(")");
         query.append(valuesSQL.toString());
         return query.toString();
     }
     
      public String getUpdateQuery() {
-        StringBuffer query = new StringBuffer("UPDATE WEATHER SET ");
-        query.append("TIMESSEARCHED = "+"'"+getTimesSearched() +"'"+ ",");
+        StringBuffer query = new StringBuffer("UPDATE SEARCHES SET ");
+        query.append("TIMESSEARCHED = "+getTimesSearched()+ ",");
         query.append("TOWN = "+"'"+getTown()+"'");
         query.append(" WHERE ID = " + getId());
         return query.toString();

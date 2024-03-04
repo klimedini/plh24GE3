@@ -30,6 +30,7 @@ public class DataView extends javax.swing.JFrame {
      * Creates new form DataView
      */
     public DataView(String townName) {
+        //overload the constructor to initialize the screen with information
         initComponents();
         townNameTitle.setText(townName);
          DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
@@ -46,9 +47,6 @@ public class DataView extends javax.swing.JFrame {
 
         Object[] row = { id,temp_C, humidity, windspeedKmph, uvIndex, weatherDesc };
          dtm.addRow(row);
-         if(i == results.size()-2){
-             break;
-         }
         }
         Weather editRow = results.get(results.size()-1);
         this.tempLabel.setText(String.valueOf( editRow.getTemperature()));
@@ -308,6 +306,7 @@ public class DataView extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteCityDataActionPerformed
 
     private void processCityDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processCityDataActionPerformed
+        // edit the last row 
         int answer = JOptionPane.showConfirmDialog(this,"Are you sure you want to save the changes?","confirm",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE );
         System.out.println("answer: " + answer);
         if(answer == 0){
@@ -316,7 +315,9 @@ public class DataView extends javax.swing.JFrame {
                     Integer.valueOf(this.windLabel.getText()), 
            Integer.valueOf( this.uvLabel.getText()), this.descriptionLabel.getText(), createDate, weatherDate, townNameTitle.getText());
             DbUtil.editDataInWeatherTable( Integer.valueOf(this.idField.getText()), data);
-
+            // refresh the table data
+            new DataView(townNameTitle.getText()).setVisible(true);
+            this.dispose();
         }
     }//GEN-LAST:event_processCityDataActionPerformed
 

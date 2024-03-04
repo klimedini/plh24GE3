@@ -25,30 +25,7 @@ public class Plh24GE3 {
     private static SimpleDateFormat timestamp = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        System.out.println("test");
-//        Date now = new Date();
-//        Weather columns = new Weather(15, 70, 10, 3, "kalws2", timestamp.format(now) ,  sdf.format(now) , "athens");
-//DbUtil.addDataInTable("weather", columns);
-//        Weather results = DbUtil.getDataFromTable("weather", 4);
-//        System.out.println(results.toString());
-//        results.setWeatherDesc("kalws4");
-        
-//        DbUtil.editDataInTable("weather", results.getId(), results);
-//        ArrayList<Weather> results = DbUtil.getDataFromTableWithName("weather", "athens");
-//        results.forEach(name -> {
-//            System.out.println(name);
-//        });
-//        System.out.println(results.toString());
-        
         new MainMenu().setVisible(true);
-        
-        //Okhttp.connect();
-
-        
-                
-
-
     }
 
 }
