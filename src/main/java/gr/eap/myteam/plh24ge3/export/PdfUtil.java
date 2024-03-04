@@ -19,24 +19,30 @@ import com.itextpdf.io.font.FontConstants;
 import com.itextpdf.kernel.color.Color; 
 import com.itextpdf.kernel.font.PdfFontFactory; 
 import com.itextpdf.kernel.font.PdfFont; 
+import com.itextpdf.kernel.geom.PageSize;
+import static com.itextpdf.kernel.pdf.PdfName.BaseFont;
 import com.itextpdf.layout.element.Text;
+import com.itextpdf.layout.property.HorizontalAlignment;
+import gr.eap.myteam.plh24ge3.models.Searches;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 /**
  *
  * @author alex
  */
 public class PdfUtil {
 
-    public static void createPdf() {
+    public static void createPdf(ArrayList<Searches> searchesData) {
         try {
             //Create Document instance.
-            String dest = "C:/itextExamples/Wheather.pdf";
+            String dest = "Wheather.pdf";
             PdfWriter writer = new PdfWriter(dest);
 
             // Creating a PdfDocument       
             PdfDocument pdf = new PdfDocument(writer);
 
             // Adding a new page 
-            pdf.addNewPage();
+            pdf.addNewPage(PageSize.A4);
 
            // Create a TextStamp object
            //TextStamp textStamp = new TextStamp("Header Text");
@@ -46,12 +52,13 @@ public class PdfUtil {
            
             // Creating a Document        
             Document document = new Document(pdf); 
-           
             // Creating text object       
             Text header = new Text("ΔΗΜΟΦΙΛΗΣ ΑΝΑΖΗΤΗΣΕΙΣ ΑΝΑ ΠΟΛΗ");
+            header.setHorizontalAlignment(HorizontalAlignment.CENTER);
            
             // Setting font of the text       
-            PdfFont font = PdfFontFactory.createFont(FontConstants.TIMES_BOLD);       
+            //PdfFont font = PdfFontFactory.createFont(FontConstants.HELVETICA, "CP1253");   
+            PdfFont font = PdfFontFactory.createFont("src/main/resources/arial.ttf", "Identity-H", true);
             header.setFont(font);
             
             // Setting font color
@@ -63,7 +70,7 @@ public class PdfUtil {
             Paragraph paragraph2 = new Paragraph();
             
             // Adding header to the paragraph
-            paragraph1.add(header);
+           // paragraph1.add(header);
             
             // Adding paragraphs to document       
             document.add(paragraph1);
@@ -75,83 +82,52 @@ public class PdfUtil {
 
             
 
-            float columnWidht[] = {100f,100f, 100f, 100f, 100f, 200f};
+            float columnWidht[] = {200f,200f};
             Table table = new Table(columnWidht);
+           // Table table = new Table(6);
             
             Cell town = new Cell();                        // Creating cell temp
+            town.setFont(font);
             town.add("Πόλη");                       // Adding name to temp   
             town.setBackgroundColor(Color.LIGHT_GRAY);      // Setting background color
-            town.setBorder(Border.NO_BORDER);              // Setting border
+            town.setBorder(new SolidBorder(Color.BLACK, 3));              // Setting border
             town.setTextAlignment(TextAlignment.CENTER);   // Setting text alignment      
             table.addCell(town);
-            
+
             
             Cell temp = new Cell();                        // Creating cell temp
-            temp.add("Θερμοκρασία");                       // Adding name to temp   
+            temp.setFont(font);
+            temp.add("Αναζητήσεις");                       // Adding name to temp   
             temp.setBackgroundColor(Color.LIGHT_GRAY);      // Setting background color
-            temp.setBorder(Border.NO_BORDER);              // Setting border
+            temp.setBorder(new SolidBorder(Color.BLACK, 3));              // Setting border
             temp.setTextAlignment(TextAlignment.CENTER);   // Setting text alignment      
             table.addCell(temp);
 
-            Cell hum = new Cell();                        // Creating cell hum
-            hum.add("Υγρασία");                            // Adding name to hum   
-            hum.setBackgroundColor(Color.LIGHT_GRAY);      // Setting background color
-            hum.setBorder(new SolidBorder(Color.BLACK, 3)); // Setting border
-            hum.setTextAlignment(TextAlignment.CENTER);   // Setting text alignment      
-            table.addCell(hum);                            //Adding c_temp to the table 
-
-            Cell wind = new Cell();                        // Creating cell wind
-            wind.add("Ταχ.Ανέμου");                            // Adding name to wind   
-            wind.setBackgroundColor(Color.LIGHT_GRAY);      // Setting background color
-            wind.setBorder(new SolidBorder(Color.BLACK, 3)); // Setting border
-            wind.setTextAlignment(TextAlignment.CENTER);   // Setting text alignment      
-            table.addCell(wind);                            //Adding c_temp to the table
-
-            Cell UV = new Cell();                        // Creating cell UV
-            UV.add("Δείκτης UV");                            // Adding name to UV   
-            UV.setBackgroundColor(Color.LIGHT_GRAY);      // Setting background color
-            UV.setBorder(new SolidBorder(Color.BLACK, 3)); // Setting border
-            UV.setTextAlignment(TextAlignment.CENTER);   // Setting text alignment      
-            table.addCell(UV);                            //Adding c_temp to the table
-
-            Cell wDesc = new Cell();                            // Creating cell wDesk
-            wDesc.add("Λεκτική Πρόγνωση Καιρού");            // Adding name to wdesk   
-            wDesc.setBackgroundColor(Color.LIGHT_GRAY);      // Setting background color
-            wDesc.setBorder(new SolidBorder(Color.BLACK, 3)); // Setting border
-            wDesc.setTextAlignment(TextAlignment.CENTER);   // Setting text alignment      
-            table.addCell(wDesc);
-            
+           
+            for (int i = 0; i < searchesData.size(); i++) {
+                Searches data = searchesData.get(i);
+                
             
             //table.town(new Cell().add.town);
-            town.setBorder(new SolidBorder(Color.BLACK, 3));
-            town.setTextAlignment(TextAlignment.CENTER);
+           // town.setBorder(new SolidBorder(Color.BLACK, 3));
             
-            Cell tempValue = new Cell();
-            //table.addtempValue(new Cell().add.temperature);
-            tempValue.setBorder(new SolidBorder(Color.BLACK, 3));
-            tempValue.setTextAlignment(TextAlignment.CENTER);
+            
+            Cell townCell = new Cell();
+            townCell.add(data.getTown());
+            townCell.setFont(font);
+            townCell.setBorder(new SolidBorder(Color.BLACK, 3));
+            townCell.setTextAlignment(TextAlignment.CENTER);
+            table.addCell(townCell);
 
-            Cell humValue = new Cell();
-            //table.addhumValue(new Cell().add.humidity);
-            humValue.setBorder(new SolidBorder(Color.BLACK, 3));
-            humValue.setTextAlignment(TextAlignment.CENTER);
-
-            Cell windValue = new Cell();
-           // table.addhumValue(new Cell().add.windspeedKmph);
-            windValue.setBorder(new SolidBorder(Color.BLACK, 3));
-            windValue.setTextAlignment(TextAlignment.CENTER);
-
-            Cell UVValue = new Cell();
-            //table.addUV(new Cell().add.uvIndex);
-            UVValue.setBorder(new SolidBorder(Color.BLACK, 3));
-            UVValue.setTextAlignment(TextAlignment.CENTER);
-
-            Cell wDescValue = new Cell();
-            //table.addwDesc(new Cell().add.weatherDesc);
-            wDescValue.setBorder(new SolidBorder(Color.BLACK, 3));
-            wDescValue.setTextAlignment(TextAlignment.CENTER);
-
-            Cell image = new Cell();
+            Cell timesCell = new Cell();
+            timesCell.add(String.valueOf(data.getTimesSearched()));
+            timesCell.setFont(font);
+            timesCell.setBorder(new SolidBorder(Color.BLACK, 3));
+            timesCell.setTextAlignment(TextAlignment.CENTER);
+            table.addCell(timesCell);
+            }
+           
+            //Cell image = new Cell();
             //image.add(Image.setAutoScale(true));
 
             
@@ -166,10 +142,10 @@ public class PdfUtil {
             //Image image = new Image(data);                        
       
             // Adding image to the document       
-            document.add(image);              
+            //document.add(image);              
       
             // Closing the document       
-            document.close();             
+            //document.close();             
       
       
             // Adding Table to document        

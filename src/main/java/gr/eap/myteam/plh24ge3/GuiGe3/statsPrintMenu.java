@@ -4,6 +4,17 @@
  */
 package gr.eap.myteam.plh24ge3.GuiGe3;
 
+import gr.eap.myteam.plh24ge3.db.DbUtil;
+import gr.eap.myteam.plh24ge3.export.PdfUtil;
+import gr.eap.myteam.plh24ge3.models.Searches;
+import gr.eap.myteam.plh24ge3.models.Weather;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author gnikol
@@ -16,6 +27,16 @@ public class statsPrintMenu extends javax.swing.JFrame {
     public statsPrintMenu() {
         initComponents();
         this.setLocationRelativeTo(null);
+        DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
+        ArrayList<Searches> searchesData = DbUtil.getDataFromSearchesTableWithId();
+        for(int i=0;i<searchesData.size();i++){
+            Searches data = searchesData.get(i);
+            System.out.println(data);
+            String town = data.getTown();
+            int times = data.getTimesSearched();
+        Object[] row = { town,times };
+         dtm.addRow(row);
+        }
     }
 
     /**
@@ -27,11 +48,27 @@ public class statsPrintMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         back = new javax.swing.JButton();
         exit = new javax.swing.JButton();
-        mostViewed = new javax.swing.JButton();
         printPDF = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,15 +94,6 @@ public class statsPrintMenu extends javax.swing.JFrame {
             }
         });
 
-        mostViewed.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
-        mostViewed.setForeground(new java.awt.Color(0, 153, 153));
-        mostViewed.setText("Προβολή Δημοφιλέστερων Αναζητήσεων");
-        mostViewed.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mostViewedActionPerformed(evt);
-            }
-        });
-
         printPDF.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         printPDF.setForeground(new java.awt.Color(0, 153, 153));
         printPDF.setText("Εκτύπωση σε PDF");
@@ -75,29 +103,40 @@ public class statsPrintMenu extends javax.swing.JFrame {
             }
         });
 
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Όνομα πόλης", "Αναζητήσεις"
+            }
+        ));
+        jTable2.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(jTable2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel1)
-                    .addComponent(mostViewed)
                     .addComponent(printPDF)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(38, 38, 38))
+                        .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mostViewed)
+                .addGap(41, 41, 41)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(printPDF)
                 .addGap(18, 18, 18)
@@ -119,12 +158,9 @@ public class statsPrintMenu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_exitActionPerformed
 
-    private void mostViewedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostViewedActionPerformed
-        
-    }//GEN-LAST:event_mostViewedActionPerformed
-
     private void printPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printPDFActionPerformed
-        
+        ArrayList<Searches> searchesData = DbUtil.getDataFromSearchesTableWithId();
+        PdfUtil.createPdf(searchesData);
     }//GEN-LAST:event_printPDFActionPerformed
 
     /**
@@ -166,7 +202,10 @@ public class statsPrintMenu extends javax.swing.JFrame {
     private javax.swing.JButton back;
     private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JButton mostViewed;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JButton printPDF;
     // End of variables declaration//GEN-END:variables
 }

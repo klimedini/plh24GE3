@@ -205,6 +205,30 @@ public class DbUtil {
         }
         return null;
     }
+        
+          public static ArrayList<Searches> getDataFromSearchesTableWithId( ) {
+        ArrayList<Searches> results = new ArrayList<Searches>();
+        try {
+            Connection connection = connect();
+            Statement statement = connection.createStatement();
+            StringBuffer getSQL = new StringBuffer("SELECT * FROM SEARCHES ORDER BY TIMESSEARCHED DESC");
+            ResultSet rs = statement.executeQuery(getSQL.toString());
+
+            while (rs.next()) {
+               Searches row = new Searches();
+                row.setId(rs.getInt("id"));
+                row.setTimesSearched(rs.getInt("timesSearched"));
+                row.setTown(rs.getString("town"));
+                results.add(row);
+
+            }
+            connection.close();
+            return results;
+        } catch (SQLException ex) {
+            Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
     
     public static ArrayList<Searches> getDataFromSearchesTableWithName(String townName) {

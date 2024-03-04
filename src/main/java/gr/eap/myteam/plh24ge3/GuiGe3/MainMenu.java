@@ -121,10 +121,14 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void cityListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityListActionPerformed
         //DbUtil.getDataFromTableWithName(tableName, townName);
+        this.dispose();
+        new ShowTownList().setVisible(true);
     }//GEN-LAST:event_cityListActionPerformed
 
     private void dateListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateListActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        new ShowDatesForTown().setVisible(true);
     }//GEN-LAST:event_dateListActionPerformed
 
     private void openDataMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openDataMenuActionPerformed

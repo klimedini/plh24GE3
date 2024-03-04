@@ -33,7 +33,7 @@ public class DataView extends javax.swing.JFrame {
         //overload the constructor to initialize the screen with information
         initComponents();
         townNameTitle.setText(townName);
-         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         ArrayList<Weather> results = DbUtil.getDataFromWeatherTableWithName(townName);
         for(int i=0;i<results.size();i++){
             Weather data = results.get(i);
