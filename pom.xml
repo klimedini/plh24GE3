@@ -74,6 +74,11 @@
          <groupId>com.itextpdf</groupId>         
          <artifactId>hyph</artifactId>         
          <version>7.0.2</version>    
-      </dependency> 
+      </dependency>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE190</version>
+        </dependency>
     </dependencies>
 </project>

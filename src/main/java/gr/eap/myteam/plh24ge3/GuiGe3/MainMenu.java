@@ -23,14 +23,17 @@ public class MainMenu extends javax.swing.JFrame {
         exit = new javax.swing.JButton();
         cityList = new javax.swing.JButton();
         dateList = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 51, 51));
         setForeground(new java.awt.Color(0, 0, 0));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Demi", 3, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 153, 153));
         jLabel1.setText("M E N U");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 0, -1, -1));
 
         openDataMenu.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         openDataMenu.setForeground(new java.awt.Color(0, 153, 153));
@@ -40,6 +43,7 @@ public class MainMenu extends javax.swing.JFrame {
                 openDataMenuActionPerformed(evt);
             }
         });
+        getContentPane().add(openDataMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 33, 272, -1));
 
         viewPrintStats.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         viewPrintStats.setForeground(new java.awt.Color(0, 153, 153));
@@ -49,6 +53,7 @@ public class MainMenu extends javax.swing.JFrame {
                 viewPrintStatsActionPerformed(evt);
             }
         });
+        getContentPane().add(viewPrintStats, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 120, 272, -1));
 
         exit.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         exit.setForeground(new java.awt.Color(0, 153, 153));
@@ -58,6 +63,7 @@ public class MainMenu extends javax.swing.JFrame {
                 exitActionPerformed(evt);
             }
         });
+        getContentPane().add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(162, 149, -1, -1));
 
         cityList.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         cityList.setForeground(new java.awt.Color(0, 153, 153));
@@ -67,6 +73,7 @@ public class MainMenu extends javax.swing.JFrame {
                 cityListActionPerformed(evt);
             }
         });
+        getContentPane().add(cityList, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 62, 272, -1));
 
         dateList.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         dateList.setForeground(new java.awt.Color(0, 153, 153));
@@ -76,43 +83,10 @@ public class MainMenu extends javax.swing.JFrame {
                 dateListActionPerformed(evt);
             }
         });
+        getContentPane().add(dateList, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 91, 272, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(dateList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cityList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(openDataMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(viewPrintStats, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(exit)
-                        .addGap(95, 95, 95))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(100, 100, 100)))
-                .addContainerGap(69, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(openDataMenu)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cityList)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dateList)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(viewPrintStats)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(exit)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gr/eap/myteam/plh24ge3/GuiGe3/menu_weather.png"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 240));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -179,6 +153,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton dateList;
     private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton openDataMenu;
     private javax.swing.JButton viewPrintStats;
     // End of variables declaration//GEN-END:variables
