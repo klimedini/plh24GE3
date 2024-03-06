@@ -304,6 +304,8 @@ public class DataView extends javax.swing.JFrame {
         if(answer == 0){
             //delete all for this town
             DbUtil.deleteDataFromWeatherTable(townNameTitle.getText());
+            new DataView(townNameTitle.getText()).setVisible(true);
+            this.dispose();
         }
     }//GEN-LAST:event_deleteCityDataActionPerformed
 
