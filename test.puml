@@ -1,0 +1,25 @@
+@startuml
+
+class gr.eap.myteam.plh24ge3.GuiGe3.DataMenu
+class gr.eap.myteam.plh24ge3.GuiGe3.DataView
+class gr.eap.myteam.plh24ge3.GuiGe3.MainMenu
+class gr.eap.myteam.plh24ge3.Plh24GE3
+class gr.eap.myteam.plh24ge3.db.DbUtil
+class gr.eap.myteam.plh24ge3.models.Weather
+class gr.eap.myteam.plh24ge3.okhttp.Okhttp
+
+
+
+gr.eap.myteam.plh24ge3.GuiGe3.DataMenu ..> gr.eap.myteam.plh24ge3.GuiGe3.MainMenu
+gr.eap.myteam.plh24ge3.GuiGe3.DataMenu ..> gr.eap.myteam.plh24ge3.db.DbUtil
+gr.eap.myteam.plh24ge3.GuiGe3.DataMenu ..> gr.eap.myteam.plh24ge3.models.Weather
+gr.eap.myteam.plh24ge3.GuiGe3.DataMenu ..> gr.eap.myteam.plh24ge3.okhttp.Okhttp
+gr.eap.myteam.plh24ge3.GuiGe3.MainMenu ..> gr.eap.myteam.plh24ge3.GuiGe3.DataMenu
+gr.eap.myteam.plh24ge3.Plh24GE3 ..> gr.eap.myteam.plh24ge3.GuiGe3.MainMenu
+gr.eap.myteam.plh24ge3.Plh24GE3 ..> gr.eap.myteam.plh24ge3.db.DbUtil
+gr.eap.myteam.plh24ge3.Plh24GE3 ..> gr.eap.myteam.plh24ge3.models.Weather
+gr.eap.myteam.plh24ge3.Plh24GE3 ..> gr.eap.myteam.plh24ge3.okhttp.Okhttp
+gr.eap.myteam.plh24ge3.db.DbUtil ..> gr.eap.myteam.plh24ge3.Plh24GE3
+gr.eap.myteam.plh24ge3.db.DbUtil ..> gr.eap.myteam.plh24ge3.models.Weather
+
+@enduml

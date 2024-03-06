@@ -4,21 +4,19 @@
  */
 package gr.eap.myteam.plh24ge3.GuiGe3;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+
 import gr.eap.myteam.plh24ge3.db.DbUtil;
 import gr.eap.myteam.plh24ge3.models.Weather;
-import gr.eap.myteam.plh24ge3.okhttp.Okhttp;
-import java.text.ParseException;
+
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+
 
 /**
  *
@@ -48,7 +46,8 @@ public class DataView extends javax.swing.JFrame {
         Object[] row = { id,temp_C, humidity, windspeedKmph, uvIndex, weatherDesc };
          dtm.addRow(row);
         }
-        Weather editRow = results.get(results.size()-1);
+        if(results.size()>0){
+            Weather editRow = results.get(results.size()-1);
         this.tempLabel.setText(String.valueOf( editRow.getTemperature()));
         this.humidityLabel.setText(String.valueOf( editRow.getHumidity()));
         this.windLabel.setText(String.valueOf( editRow.getWindspeedKmph()));
@@ -58,6 +57,8 @@ public class DataView extends javax.swing.JFrame {
         weatherDate = editRow.getWeatherDate();
         createDate = editRow.getCreateDate();
        System.out.println(editRow);
+        }
+        
     }
     
     public DataView() {
@@ -302,6 +303,7 @@ public class DataView extends javax.swing.JFrame {
         System.out.println("answer: " + answer);
         if(answer == 0){
             //delete all for this town
+            DbUtil.deleteDataFromWeatherTable(townNameTitle.getText());
         }
     }//GEN-LAST:event_deleteCityDataActionPerformed
 

@@ -1,9 +1,7 @@
 package gr.eap.myteam.plh24ge3.GuiGe3;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import gr.eap.myteam.plh24ge3.GuiGe3.MainMenu;
 import gr.eap.myteam.plh24ge3.db.DbUtil;
 import gr.eap.myteam.plh24ge3.models.Searches;
 import gr.eap.myteam.plh24ge3.models.Weather;
@@ -253,7 +251,9 @@ public class DataMenu extends javax.swing.JFrame {
             boolean found = false;
             for(int i=0;i<savedResults.size();i++){
                 Weather row = savedResults.get(i);
-                if(row.getWeatherDate().equalsIgnoreCase(sdf.format(localObsDateTime))){
+                if(row.getWeatherDate().equalsIgnoreCase(sdf.format(localObsDateTime)) && 
+                        row.getHumidity() == results.getHumidity()  && row.getTemperature() == results.getTemperature() && row.getTown().equalsIgnoreCase(results.getTown()) && 
+                        row.getUvIndex() == results.getUvIndex() && row.getWeatherDesc().equalsIgnoreCase(results.getWeatherDesc()) && row.getWindspeedKmph() == results.getWindspeedKmph() ){
                     System.out.println("data found in db no need to save again");
                     found = true;
                     break;

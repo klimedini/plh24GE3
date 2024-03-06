@@ -7,12 +7,7 @@ package gr.eap.myteam.plh24ge3.GuiGe3;
 import gr.eap.myteam.plh24ge3.db.DbUtil;
 import gr.eap.myteam.plh24ge3.export.PdfUtil;
 import gr.eap.myteam.plh24ge3.models.Searches;
-import gr.eap.myteam.plh24ge3.models.Weather;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**

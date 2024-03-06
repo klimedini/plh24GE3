@@ -4,7 +4,6 @@
  */
 package gr.eap.myteam.plh24ge3.db;
 
-import gr.eap.myteam.plh24ge3.Plh24GE3;
 import gr.eap.myteam.plh24ge3.models.Searches;
 import gr.eap.myteam.plh24ge3.models.Weather;
 import java.sql.Connection;
@@ -70,7 +69,7 @@ public class DbUtil {
             
             return connection;
         } catch (Exception ex) {
-            Logger.getLogger(Plh24GE3.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -93,6 +92,19 @@ public class DbUtil {
             Statement statement = connection.createStatement();
             StringBuffer deleteSQL = new StringBuffer("DELETE FROM " + name.toUpperCase());
             deleteSQL.append(" WHERE ID = " + id);
+            int num = statement.executeUpdate(deleteSQL.toString());
+            System.out.println("deleted " + num + " rows");
+            connection.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+    }
+    
+    public static void deleteDataFromWeatherTable(String townName) {
+        try {
+            Connection connection = connect();
+            Statement statement = connection.createStatement();
+            StringBuffer deleteSQL = new StringBuffer("DELETE FROM WEATHER WHERE TOWN = " + "'"+townName+"'" );
             int num = statement.executeUpdate(deleteSQL.toString());
             System.out.println("deleted " + num + " rows");
             connection.close();
