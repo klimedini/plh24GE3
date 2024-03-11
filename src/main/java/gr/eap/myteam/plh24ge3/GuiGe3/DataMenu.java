@@ -61,11 +61,9 @@ public class DataMenu extends javax.swing.JFrame {
         uvLabel = new javax.swing.JTextField();
         descriptionLabel = new javax.swing.JTextField();
         showCityData1 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFont(new java.awt.Font("Sitka Small", 2, 12)); // NOI18N
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         townName.setAlignmentX(0.0F);
         townName.addActionListener(new java.awt.event.ActionListener() {
@@ -73,12 +71,10 @@ public class DataMenu extends javax.swing.JFrame {
                 townNameActionPerformed(evt);
             }
         });
-        getContentPane().add(townName, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 45, 236, -1));
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 153, 153));
         jLabel1.setText("Επιλογή Πόλης :");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(136, 48, 108, -1));
 
         showCityData.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         showCityData.setForeground(new java.awt.Color(0, 153, 153));
@@ -88,12 +84,10 @@ public class DataMenu extends javax.swing.JFrame {
                 saveData(evt);
             }
         });
-        getContentPane().add(showCityData, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 80, 193, 35));
 
         jLabel2.setFont(new java.awt.Font("Franklin Gothic Demi", 3, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 153, 153));
         jLabel2.setText("M E N U");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 6, -1, -1));
 
         back.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         back.setForeground(new java.awt.Color(0, 153, 153));
@@ -103,7 +97,6 @@ public class DataMenu extends javax.swing.JFrame {
                 backActionPerformed(evt);
             }
         });
-        getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 190, 109, -1));
 
         exit.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         exit.setForeground(new java.awt.Color(0, 153, 153));
@@ -113,32 +106,26 @@ public class DataMenu extends javax.swing.JFrame {
                 exitActionPerformed(evt);
             }
         });
-        getContentPane().add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(363, 190, 109, -1));
 
         jButton1.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 102, 102));
         jButton1.setText("Θερμοκρασία");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 133, -1, -1));
 
         jButton2.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 102, 102));
         jButton2.setText("Υγρασία");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 133, 118, -1));
 
         jButton3.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 102, 102));
         jButton3.setText("Ταχ. Ανέμου");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 133, 139, -1));
 
         jButton4.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         jButton4.setForeground(new java.awt.Color(0, 102, 102));
         jButton4.setText("Δείκτης UV");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(401, 133, 118, -1));
 
         jButton5.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         jButton5.setForeground(new java.awt.Color(0, 102, 102));
         jButton5.setText("Λεκτική Πρόγνωση Καιρού");
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 133, -1, -1));
 
         jButton6.setForeground(new java.awt.Color(0, 153, 153));
         jButton6.setText("Αναζήτηση");
@@ -147,22 +134,16 @@ public class DataMenu extends javax.swing.JFrame {
                 search(evt);
             }
         });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(492, 45, -1, -1));
 
         tempLabel.setEditable(false);
-        getContentPane().add(tempLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 162, 117, -1));
 
         humidityLabel.setEditable(false);
-        getContentPane().add(humidityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 162, 117, -1));
 
         windLabel.setEditable(false);
-        getContentPane().add(windLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 162, 148, -1));
 
         uvLabel.setEditable(false);
-        getContentPane().add(uvLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 162, 117, -1));
 
         descriptionLabel.setEditable(false);
-        getContentPane().add(descriptionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 162, 191, -1));
 
         showCityData1.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         showCityData1.setForeground(new java.awt.Color(0, 153, 153));
@@ -172,9 +153,7 @@ public class DataMenu extends javax.swing.JFrame {
                 showCityData(evt);
             }
         });
-        getContentPane().add(showCityData1, new org.netbeans.lib.awtextra.AbsoluteConstraints(362, 80, 195, 35));
 
-<<<<<<< Updated upstream
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -253,10 +232,6 @@ public class DataMenu extends javax.swing.JFrame {
                     .addComponent(exit))
                 .addContainerGap())
         );
-=======
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gr/eap/myteam/plh24ge3/GuiGe3/weather.png"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 260));
->>>>>>> Stashed changes
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -414,7 +389,6 @@ public class DataMenu extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JButton showCityData;
     private javax.swing.JButton showCityData1;
     private javax.swing.JTextField tempLabel;

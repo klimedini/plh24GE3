@@ -49,7 +49,6 @@ public class statsPrintMenu extends javax.swing.JFrame {
         back = new javax.swing.JButton();
         exit = new javax.swing.JButton();
         printPDF = new javax.swing.JButton();
-<<<<<<< Updated upstream
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
 
@@ -65,18 +64,12 @@ public class statsPrintMenu extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(jTable1);
-=======
-        jLabel3 = new javax.swing.JLabel();
->>>>>>> Stashed changes
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Demi", 3, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 153, 153));
         jLabel1.setText("M E N U");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(320, 20, 67, 21);
 
         back.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         back.setForeground(new java.awt.Color(0, 153, 153));
@@ -86,8 +79,6 @@ public class statsPrintMenu extends javax.swing.JFrame {
                 backActionPerformed(evt);
             }
         });
-        getContentPane().add(back);
-        back.setBounds(140, 200, 129, 23);
 
         exit.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         exit.setForeground(new java.awt.Color(0, 153, 153));
@@ -97,23 +88,7 @@ public class statsPrintMenu extends javax.swing.JFrame {
                 exitActionPerformed(evt);
             }
         });
-        getContentPane().add(exit);
-        exit.setBounds(430, 200, 131, 23);
 
-<<<<<<< Updated upstream
-=======
-        mostViewed.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
-        mostViewed.setForeground(new java.awt.Color(0, 153, 153));
-        mostViewed.setText("Προβολή Δημοφιλέστερων Αναζητήσεων");
-        mostViewed.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mostViewedActionPerformed(evt);
-            }
-        });
-        getContentPane().add(mostViewed);
-        mostViewed.setBounds(200, 70, 283, 23);
-
->>>>>>> Stashed changes
         printPDF.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 14)); // NOI18N
         printPDF.setForeground(new java.awt.Color(0, 153, 153));
         printPDF.setText("Εκτύπωση σε PDF");
@@ -122,10 +97,7 @@ public class statsPrintMenu extends javax.swing.JFrame {
                 printPDFActionPerformed(evt);
             }
         });
-        getContentPane().add(printPDF);
-        printPDF.setBounds(270, 130, 144, 23);
 
-<<<<<<< Updated upstream
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -168,11 +140,6 @@ public class statsPrintMenu extends javax.swing.JFrame {
                     .addComponent(exit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(17, 17, 17))
         );
-=======
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gr/eap/myteam/plh24ge3/GuiGe3/stats_weather.png"))); // NOI18N
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 0, 630, 260);
->>>>>>> Stashed changes
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -230,15 +197,10 @@ public class statsPrintMenu extends javax.swing.JFrame {
     private javax.swing.JButton back;
     private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
-<<<<<<< Updated upstream
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-=======
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JButton mostViewed;
->>>>>>> Stashed changes
     private javax.swing.JButton printPDF;
     // End of variables declaration//GEN-END:variables
 }
